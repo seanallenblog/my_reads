@@ -14,7 +14,6 @@ class App extends Component {
   }
 
   getAllBooks () {
-    console.log('getting all books');
     BooksAPI.getAll()
       .then(allUsersBooks => {
         this.setState(() => ({

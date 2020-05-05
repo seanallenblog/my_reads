@@ -12,11 +12,8 @@ class SearchResults extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     const { searchTerm } = this.props;
-    const { searchTermPrev } = prevProps;
     console.log(searchTerm);
-    console.log(searchTermPrev);
-    if (searchTerm.length && searchTerm !== searchTermPrev) {
-      console.log('Whiskey tango');
+    if (searchTerm !== '' && searchTerm !== prevProps.searchTerm) {
       BooksAPI.search(searchTerm)
         .then(searchResults => {
           this.setState(() => ({
@@ -27,6 +24,7 @@ class SearchResults extends Component {
   }
 
   render () {
+    console.log('props search results:', this.props);
     const results = this.state.searchResults;
     const { allUsersBooks } = this.props;
     return (
@@ -36,7 +34,8 @@ class SearchResults extends Component {
             results && results.length > 0 ?
               results.map(book => (
                 <BookThumbNail
-                  data={book}
+                  key={book.id}
+                  bookData={book}
                   allUsersBooks={allUsersBooks} />
               )) : (
                 <p>0 results for current search term</p>

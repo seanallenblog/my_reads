@@ -12,18 +12,17 @@ class Search extends Component {
     }
   }
 
-  updateSearchTerm = (searchTerm) => {
+  updateSearchTerm (searchTerm) {
     this.setState(() => ({
       searchTerm
-    }))
+    }));
   }
 
   render () {
     const { allUsersBooks } = this.props;
-    console.log(this.state);
     return (
       <div>
-        <SearchBar updateSearchTerm={this.updateSearchTerm} />
+        <SearchBar updateSearchTerm={(searchTerm) => this.updateSearchTerm(searchTerm)} />
         <SearchResults
           searchTerm={this.state.searchTerm}
           allUsersBooks={allUsersBooks} />

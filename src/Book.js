@@ -1,24 +1,23 @@
 import React from 'react';
 import ShelfControls from './ShelfControls';
-import { update } from './BooksAPI';
 
 const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
-  // console.log(bookData);
-  // console.log('All the books:', allUsersBooks);
   let currentShelf;
 
   if (bookData.shelf) {
     currentShelf = bookData.shelf;
   } else {
     const existingBook = allUsersBooks.find(book => book.title === bookData.title);
-    currentShelf = existingBook.shelf;
+    currentShelf = existingBook ? existingBook.shelf : 'none';
   }
 
+  const authors = bookData.authors && bookData.authors.length > 0 ? bookData.authors : '';
+  const coverImageURL = bookData.imageLinks && bookData.imageLinks.length > 0 ? `url(${bookData.imageLinks.smallThumbnail})` : 'none';
 
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookData.imageLinks.smallThumbnail})` }}></div>
+        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: { coverImageURL } }}></div>
         <ShelfControls
           bookData={bookData}
           currentShelf={currentShelf}
@@ -26,7 +25,7 @@ const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
         />
       </div>
       <div className="book-title">{bookData.title}</div>
-      <div className="book-authors">{bookData.authors.join(', ')}</div>
+      <div className="book-authors">{authors}</div>
     </div>
   );
 };
