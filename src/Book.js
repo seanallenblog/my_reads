@@ -1,15 +1,16 @@
 import React from 'react';
 import ShelfControls from './ShelfControls';
+import { update } from './BooksAPI';
 
-const BookThumbNail = ({ data, allUsersBooks }) => {
-  console.log(data);
-  console.log('All the books:', allUsersBooks);
+const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
+  // console.log(bookData);
+  // console.log('All the books:', allUsersBooks);
   let currentShelf;
 
-  if (data.shelf) {
-    currentShelf = data.shelf;
+  if (bookData.shelf) {
+    currentShelf = bookData.shelf;
   } else {
-    const existingBook = allUsersBooks.find(book => book.title === data.title);
+    const existingBook = allUsersBooks.find(book => book.title === bookData.title);
     currentShelf = existingBook.shelf;
   }
 
@@ -17,11 +18,15 @@ const BookThumbNail = ({ data, allUsersBooks }) => {
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${data.imageLinks.smallThumbnail})` }}></div>
-        <ShelfControls currentShelf={currentShelf} />
+        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookData.imageLinks.smallThumbnail})` }}></div>
+        <ShelfControls
+          bookData={bookData}
+          currentShelf={currentShelf}
+          updateShelf={updateShelf}
+        />
       </div>
-      <div className="book-title">{data.title}</div>
-      <div className="book-authors">{data.authors.join(', ')}</div>
+      <div className="book-title">{bookData.title}</div>
+      <div className="book-authors">{bookData.authors.join(', ')}</div>
     </div>
   );
 };

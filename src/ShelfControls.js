@@ -1,32 +1,35 @@
 import React from 'react';
 
-const ShelfControls = ({ currentShelf }) => {
-  console.log('This is the current shelf:', currentShelf);
+const ShelfControls = ({ updateShelf, bookData, currentShelf }) => {
+
+
+  const handleSelect = (shelf) => {
+    updateShelf(bookData, shelf);
+  }
+
   return (
     <div className="book-shelf-changer">
-      <select>
+      <select
+        value={currentShelf}
+        onChange={(e) => handleSelect(e.target.value)}>
         <option
           value="move"
           disabled>
           Move to...
         </option>
         <option
-          defaultValue={{ currentShelf }}
           value="currentlyReading">
           Currently Reading
         </option>
         <option
-          defaultValue={{ currentShelf }}
           value="wantToRead">
           Want to Read
         </option>
         <option
-          defaultValue={{ currentShelf }}
           value="read">
           Read
         </option>
         <option
-          defaultValue={{ currentShelf }}
           value="none">
           None
         </option>

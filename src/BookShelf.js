@@ -1,7 +1,7 @@
 import React from 'react';
 import Book from './Book';
 
-const BookShelf = ({ shelfNamePretty, shelfName, allUsersBooks }) => {
+const BookShelf = ({ updateShelf, shelfNamePretty, shelfName, allUsersBooks }) => {
 
   const books = allUsersBooks.filter(book => book.shelf === shelfName);
 
@@ -14,8 +14,9 @@ const BookShelf = ({ shelfNamePretty, shelfName, allUsersBooks }) => {
             books.map(book => (
               <li key={book.id}>
                 <Book
-                  data={book}
+                  bookData={book}
                   allUsersBooks={allUsersBooks}
+                  updateShelf={updateShelf}
                 />
               </li>
             ))
