@@ -10,10 +10,13 @@ class SearchResults extends Component {
     }
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     const { searchTerm } = this.props;
     const { searchTermPrev } = prevProps;
-    if (searchTerm !== searchTermPrev) {
+    console.log(searchTerm);
+    console.log(searchTermPrev);
+    if (searchTerm.length && searchTerm !== searchTermPrev) {
+      console.log('Whiskey tango');
       BooksAPI.search(searchTerm)
         .then(searchResults => {
           this.setState(() => ({
@@ -30,11 +33,14 @@ class SearchResults extends Component {
       <div className="search-books-results">
         <ol className="books-grid">
           {
-            results.map(book => (
-              <BookThumbNail
-                data={book}
-                allUsersBooks={allUsersBooks} />
-            ))
+            results && results.length > 0 ?
+              results.map(book => (
+                <BookThumbNail
+                  data={book}
+                  allUsersBooks={allUsersBooks} />
+              )) : (
+                <p>0 results for current search term</p>
+              )
           }
         </ol>
       </div>
