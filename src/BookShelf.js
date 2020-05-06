@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Book from './Book';
 
 const BookShelf = ({ updateShelf, shelfNamePretty, shelfName, allUsersBooks }) => {
-
   const books = allUsersBooks.filter(book => book.shelf === shelfName);
 
   return (
@@ -22,7 +21,6 @@ const BookShelf = ({ updateShelf, shelfNamePretty, shelfName, allUsersBooks }) =
               </li>
             ))
           }
-
         </ol>
       </div>
     </div>

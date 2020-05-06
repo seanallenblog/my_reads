@@ -6,7 +6,7 @@ import BookShelf from './BookShelf';
 
 const BookShelves = ({ allUsersBooks, updateShelf }) => {
   return (
-    <div className="app">
+    <React.Fragment>
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
@@ -32,7 +32,7 @@ const BookShelves = ({ allUsersBooks, updateShelf }) => {
       <div className="open-search">
         <Link className='plus-button' to='/search'>Add a book</Link>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

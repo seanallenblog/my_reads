@@ -14,8 +14,6 @@ class SearchBar extends Component {
     this.setState(() => ({
       searchInput
     }), this.props.updateSearchTerm(searchInput));
-
-
   }
 
   render () {

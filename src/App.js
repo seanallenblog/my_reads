@@ -36,7 +36,7 @@ class App extends Component {
   render () {
     const { allUsersBooks } = this.state;
     return (
-      <React.Fragment>
+      <div className='app'>
         <Route exact path='/' render={() => (
           <BookShelves
             allUsersBooks={allUsersBooks}
@@ -48,7 +48,7 @@ class App extends Component {
             allUsersBooks={allUsersBooks}
             updateShelf={(bookId, shelf) => this.updateShelf(bookId, shelf)} />
         )} />
-      </React.Fragment>
+      </div>
     )
   }
 }
