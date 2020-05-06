@@ -19,12 +19,13 @@ class Search extends Component {
   }
 
   render () {
-    const { allUsersBooks } = this.props;
+    const { allUsersBooks, updateShelf } = this.props;
     return (
       <div>
         <SearchBar updateSearchTerm={(searchTerm) => this.updateSearchTerm(searchTerm)} />
         <SearchResults
           searchTerm={this.state.searchTerm}
+          updateShelf={updateShelf}
           allUsersBooks={allUsersBooks} />
       </div>
     );
@@ -33,6 +34,7 @@ class Search extends Component {
 
 Search.propTypes = {
   allUsersBooks: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
 };
 
 export default Search;

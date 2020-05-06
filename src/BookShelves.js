@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './App.css';
 import BookShelf from './BookShelf';
@@ -15,20 +16,17 @@ const BookShelves = ({ allUsersBooks, updateShelf }) => {
             allUsersBooks={allUsersBooks}
             shelfName='currentlyReading'
             shelfNamePretty='Currently Reading'
-            updateShelf={updateShelf}
-          />
+            updateShelf={updateShelf} />
           <BookShelf
             allUsersBooks={allUsersBooks}
             shelfName='wantToRead'
             shelfNamePretty='Want to Read'
-            updateShelf={updateShelf}
-          />
+            updateShelf={updateShelf} />
           <BookShelf
             allUsersBooks={allUsersBooks}
             shelfName='read'
             shelfNamePretty='Read'
-            updateShelf={updateShelf}
-          />
+            updateShelf={updateShelf} />
         </div>
       </div>
       <div className="open-search">
@@ -36,6 +34,11 @@ const BookShelves = ({ allUsersBooks, updateShelf }) => {
       </div>
     </div>
   )
+}
+
+BookShelves.propTypes = {
+  allUsersBooks: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
 }
 
 export default BookShelves;

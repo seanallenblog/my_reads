@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import BookThumbNail from './Book';
+import PropTypes from 'prop-types';
+import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 
 class SearchResults extends Component {
@@ -12,8 +13,7 @@ class SearchResults extends Component {
 
   componentDidUpdate (prevProps) {
     const { searchTerm } = this.props;
-    console.log(searchTerm);
-    if (searchTerm !== '' && searchTerm !== prevProps.searchTerm) {
+    if (searchTerm !== prevProps.searchTerm) {
       BooksAPI.search(searchTerm)
         .then(searchResults => {
           this.setState(() => ({
@@ -24,18 +24,18 @@ class SearchResults extends Component {
   }
 
   render () {
-    console.log('props search results:', this.props);
     const results = this.state.searchResults;
-    const { allUsersBooks } = this.props;
+    const { allUsersBooks, updateShelf } = this.props;
     return (
       <div className="search-books-results">
         <ol className="books-grid">
           {
             results && results.length > 0 ?
               results.map(book => (
-                <BookThumbNail
+                <Book
                   key={book.id}
                   bookData={book}
+                  updateShelf={updateShelf}
                   allUsersBooks={allUsersBooks} />
               )) : (
                 <p>0 results for current search term</p>
@@ -46,5 +46,11 @@ class SearchResults extends Component {
     );
   }
 };
+
+SearchResults.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+  allUsersBooks: PropTypes.array.isRequired
+}
 
 export default SearchResults;

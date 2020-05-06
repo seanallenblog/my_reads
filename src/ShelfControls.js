@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ShelfControls = ({ updateShelf, bookData, currentShelf }) => {
-
 
   const handleSelect = (shelf) => {
     updateShelf(bookData, shelf);
@@ -37,5 +37,11 @@ const ShelfControls = ({ updateShelf, bookData, currentShelf }) => {
     </div>
   );
 };
+
+ShelfControls.propTypes = {
+  updateShelf: PropTypes.func.isRequired,
+  bookData: PropTypes.object.isRequired,
+  currentShelf: PropTypes.string.isRequired
+}
 
 export default ShelfControls;

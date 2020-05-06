@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ShelfControls from './ShelfControls';
 
-const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
+const Book = ({ updateShelf, bookData, allUsersBooks }) => {
   let currentShelf;
 
   if (bookData.shelf) {
@@ -12,12 +13,13 @@ const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
   }
 
   const authors = bookData.authors && bookData.authors.length > 0 ? bookData.authors : '';
-  const coverImageURL = bookData.imageLinks && bookData.imageLinks.length > 0 ? `url(${bookData.imageLinks.smallThumbnail})` : 'none';
+  const coverImageURL = bookData.imageLinks && Object.keys(bookData.imageLinks).length > 0
+    ? `url(${bookData.imageLinks.smallThumbnail})` : 'none';
 
   return (
     <div className="book">
       <div className="book-top">
-        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: { coverImageURL } }}></div>
+        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `${coverImageURL}` }}></div>
         <ShelfControls
           bookData={bookData}
           currentShelf={currentShelf}
@@ -30,4 +32,10 @@ const BookThumbNail = ({ updateShelf, bookData, allUsersBooks }) => {
   );
 };
 
-export default BookThumbNail;
+Book.propTypes = {
+  bookData: PropTypes.object.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+  allUsersBooks: PropTypes.array.isRequired
+}
+
+export default Book;
