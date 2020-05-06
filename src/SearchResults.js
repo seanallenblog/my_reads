@@ -13,7 +13,10 @@ class SearchResults extends Component {
 
   componentDidUpdate (prevProps) {
     const { searchTerm } = this.props;
-    if (searchTerm !== prevProps.searchTerm) {
+    if (searchTerm === '' && prevProps.searchTerm !== '') {
+      this.setState({ searchResults: [] });
+    }
+    else if (searchTerm !== prevProps.searchTerm) {
       BooksAPI.search(searchTerm)
         .then(searchResults => {
           this.setState(() => ({
