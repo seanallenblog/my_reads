@@ -10,7 +10,7 @@ class SearchResults extends Component {
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate (prevProps) {
     const { searchTerm } = this.props;
     console.log(searchTerm);
     if (searchTerm !== '' && searchTerm !== prevProps.searchTerm) {
